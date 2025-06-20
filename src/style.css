@@ -4,10 +4,26 @@
   box-sizing: border-box;
 }
 
+:root {
+  --accent: #5dc4ba;
+}
+
+/**
+
+basic/header/sidebar
+
+**/
+
+body {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
 h1,
 h2,
 .logo {
-  font-family: "Pacifico", cursive;
+  font-family: "Poppins", sans-serif;
 }
 
 body,
@@ -15,4 +31,136 @@ p,
 button,
 input {
   font-family: "Roboto", sans-serif;
+}
+
+#content {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.main-container {
+  flex: 1;
+  overflow-y: auto;
+}
+
+.header {
+  background-color: var(--accent);
+  color: white;
+  padding: 1rem;
+  font-family: "Pacifico", cursive;
+  font-size: 2rem;
+}
+
+.side-bar {
+  width: 250px;
+  background-color: #f4f4f4;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  border-right: 2px solid #ddd;
+  flex-shrink: 0;
+  flex-basis: 250px;
+}
+
+.nav {
+  list-style: none;
+  padding: 0;
+}
+
+.nav li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0.5rem;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background 0.3s;
+}
+
+.nav li:hover {
+  background-color: #e0e0e0;
+}
+
+.title {
+  font-weight: 500;
+  color: #333;
+}
+
+.count {
+  background-color: var(--accent);
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+}
+
+.new-todo {
+  background-color: var(--accent);
+  color: white;
+  font-size: 1.8rem;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  line-height: 40px;
+  border-radius: 50%;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+  margin-top: 2rem;
+  margin-left: 0.5rem;
+  align-self: center;
+}
+
+/**
+
+Main todo list
+
+**/
+
+.todo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: white;
+  padding: 0.75rem 1rem;
+  border-left: 5px solid var(--accent);
+  border-radius: 6px;
+  margin: 2rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  max-width: 100%;
+  min-height: 60px;
+  gap: 1rem;
+}
+
+.todo_check {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--accent);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.task-title {
+  flex: 1;
+  font-weight: 500;
+  font-size: 1rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.date,
+.edit,
+.delete {
+  flex-shrink: 0;
+  margin-left: 0.75rem;
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.edit:hover,
+.delete:hover {
+  color: var(--accent);
 }

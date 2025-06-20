@@ -3,15 +3,73 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
     <link
-      href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap"
       rel="stylesheet"
     />
     <link
       href="https://fonts.googleapis.com/css2?family=Pacifico&family=Roboto&display=swap"
       rel="stylesheet"
     />
-    <title>Document</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <title>tings to-do</title>
   </head>
-  <body></body>
+  <body>
+    <header class="header">
+      <h1>// TINGS TO - DO</h1>
+    </header>
+    <div id="content">
+      <nav class="side-bar">
+        <ul class="nav">
+          <li>
+            <span class="title">Home</span>
+            <span class="count">6</span>
+          </li>
+          <li>
+            <span class="title">Today</span>
+            <span class="count">1</span>
+          </li>
+          <li>
+            <span class="title">Week</span>
+            <span class="count">5</span>
+          </li>
+          <li>
+            <span>Projects</span>
+            <ul class="projects"></ul>
+          </li>
+          <li>Notes</li>
+        </ul>
+
+        <div class="new-todo" title="Add a new task">+</div>
+      </nav>
+      <div class="main-container task-list">
+        <div class="todo">
+          <div class="todo_check"></div>
+          <div class="task-title">drop a banger</div>
+          <div class="details"></div>
+          <div class="date">Jun 20th</div>
+          <div class="edit"><i class="fas fa-pen"></i></div>
+          <div class="delete"><i class="fas fa-trash-alt"></i></div>
+        </div>
+        <div class="todo">
+          <div class="todo_check"></div>
+          <div class="task-title">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quaerat
+            porro similique consectetur saepe veritatis ex numquam provident
+            nobis illo! Odio nobis repellendus nesciunt, corrupti doloribus
+            recusandae ut tempora dicta itaque?
+          </div>
+          <div class="details"></div>
+          <div class="date">Jun 20th</div>
+          <div class="edit"><i class="fas fa-pen"></i></div>
+          <div class="delete"><i class="fas fa-trash-alt"></i></div>
+        </div>
+      </div>
+    </div>
+  </body>
 </html>
