@@ -149,6 +149,7 @@ Main todo list
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 2px;
 }
 
 .date,
@@ -160,7 +161,32 @@ Main todo list
   color: #555;
 }
 
-.edit:hover,
-.delete:hover {
+.edit i,
+.delete i {
+  color: #888;
+  transition: color 0.2s;
+}
+
+.edit i:hover,
+.delete i:hover {
   color: var(--accent);
+}
+
+.task-info {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+.details {
+  font-size: 0.9rem;
+  color: #777;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
 }
