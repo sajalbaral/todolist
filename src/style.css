@@ -190,3 +190,8 @@ Main todo list
   text-overflow: ellipsis;
   max-width: 100%;
 }
+
+.nav li.selected {
+  background-color: var(--accent);
+  color: white;
+}
