@@ -1,8 +1,11 @@
 import { createTodo } from "./modules/todo";
 import { renderTodo } from "./modules/ui";
+import { renderSidebar } from "./modules/sidebar";
 import "./style.css";
 
 const mainDiv = document.querySelector(".main-container");
+const content = document.getElementById("content");
+content.insertBefore(renderSidebar(), mainDiv);
 
 mainDiv.innerHTML = "";
 const test = [

@@ -13,11 +13,8 @@ function createList(title, name) {
 }
 
 export function renderSidebar() {
-  const content = document.getElementById("content");
-
   const nav = document.createElement("nav");
   nav.classList.add("side-bar");
-  content.appendChild(nav);
 
   const navUl = document.createElement("ul");
   navUl.classList.add("nav");
@@ -29,5 +26,5 @@ export function renderSidebar() {
 
   navUl.append(home, today, week);
 
-  return { content, home, today, week };
+  return nav;
 }
