@@ -1,11 +1,19 @@
 import { createTodo } from "./modules/todo";
 import { renderTodo } from "./modules/ui";
 import { renderSidebar } from "./modules/sidebar";
+import { createForm } from "./modules/form";
 import "./style.css";
 
 const mainDiv = document.querySelector(".main-container");
 const content = document.getElementById("content");
+const body = document.getElementById("body");
+
 content.insertBefore(renderSidebar(), mainDiv);
+body.appendChild(createForm());
+
+const modal = document.querySelector(".modal");
+const cancel = document.querySelector(".cancel");
+const addButton = document.querySelector(".new-todo");
 
 mainDiv.innerHTML = "";
 const test = [
@@ -16,4 +24,12 @@ const test = [
 
 test.forEach((ele) => {
   mainDiv.append(renderTodo(ele));
+});
+
+addButton.addEventListener("click", () => {
+  modal.classList.remove("hidden");
+});
+
+cancel.addEventListener("click", () => {
+  modal.classList.add("hidden");
 });

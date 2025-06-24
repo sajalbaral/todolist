@@ -24,7 +24,11 @@ export function renderSidebar() {
   const today = createList("today", "today");
   const week = createList("week", "week");
 
-  navUl.append(home, today, week);
+  const addButton = document.createElement("div");
+  addButton.classList.add("new-todo");
+  addButton.textContent = "+";
+
+  navUl.append(home, today, week, addButton);
 
   return nav;
 }
