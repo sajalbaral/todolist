@@ -1,7 +1,7 @@
 import { createTodo } from "./modules/todo";
 import { renderTodo } from "./modules/ui";
 import { renderSidebar } from "./modules/sidebar";
-import { createForm } from "./modules/form";
+import { createForm, formHandling } from "./modules/form";
 import "./style.css";
 
 const mainDiv = document.querySelector(".main-container");
@@ -32,4 +32,10 @@ addButton.addEventListener("click", () => {
 
 cancel.addEventListener("click", () => {
   modal.classList.add("hidden");
+});
+
+formHandling((todoData) => {
+  const newTodo = createTodo(...todoData);
+  const todoElement = renderTodo(newTodo);
+  mainDiv.appendChild(todoElement);
 });

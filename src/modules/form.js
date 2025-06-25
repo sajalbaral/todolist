@@ -73,3 +73,21 @@ export function createForm() {
 
   return modal;
 }
+
+export function formHandling(callback) {
+  const grabForm = document.getElementById("todo-form");
+  grabForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const title = grabForm.title.value;
+    if (title === "") alert("fill out the title");
+
+    const description = grabForm.description.value;
+    const dueDate = grabForm.dueDate.value;
+    const priority = grabForm.priority.value;
+
+    callback({ title, description, dueDate, priority });
+    grabForm.reset();
+    const modal = document.querySelector(".modal");
+    modal.classList.add("hidden");
+  });
+}
