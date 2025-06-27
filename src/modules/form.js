@@ -1,10 +1,11 @@
 function createLabels(title, type) {
   const label = document.createElement("label");
   label.textContent = title;
+  label.textContent = title === "dueDate" ? "Due Date" : title;
 
   const input = document.createElement("input");
   input.type = type;
-  input.name = title.toLowerCase();
+  input.name = title;
   input.required = true;
 
   label.appendChild(input);
@@ -23,6 +24,7 @@ function createOptions(value, text) {
 function formTemplate() {
   const formDiv = document.createElement("form");
   formDiv.classList.add("todo-form");
+  formDiv.id = "todo-form";
 
   const newTodo = document.createElement("h2");
   newTodo.textContent = "Add new todo";
@@ -35,7 +37,7 @@ function formTemplate() {
   textArea.name = "description";
   description.appendChild(textArea);
 
-  const dueDate = createLabels("Due Date", "date");
+  const dueDate = createLabels("dueDate", "date");
 
   const prio = document.createElement("label");
   prio.textContent = "Priority";
@@ -79,7 +81,7 @@ export function formHandling(callback) {
   grabForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const title = grabForm.title.value;
-    if (title === "") alert("fill out the title");
+    if (title === "") return alert("fill out the title");
 
     const description = grabForm.description.value;
     const dueDate = grabForm.dueDate.value;

@@ -12,7 +12,7 @@ function createList(title, name) {
   return list;
 }
 
-export function renderSidebar() {
+export function renderSidebar(todos) {
   const nav = document.createElement("nav");
   nav.classList.add("side-bar");
 
@@ -29,6 +29,27 @@ export function renderSidebar() {
   addButton.textContent = "+";
 
   navUl.append(home, today, week, addButton);
+
+  const filterAndRender = (selectedTab) => {
+    const mainDiv = document.querySelector(".main-container");
+    mainDiv.innerHTML = "";
+
+    let filtered = [];
+    if (selectedTab === "home") filtered = todos;
+    if (selectedTab === "today")
+      filtered = todos.filter((t) => isToday(t.dueDate));
+    if (selectedTab === "week")
+      filtered = todos.filter((t) => isThisWeek(t.dueDate));
+
+    filtered.forEach((t) => mainDiv.append(renderTodo(t)));
+  };
+
+  [home, today, week].forEach((tab) => {
+    tab.addEventListener("click", () => {
+      const selected = tab.getAttribute("data-tab");
+      filterAndRender(selected);
+    });
+  });
 
   return nav;
 }

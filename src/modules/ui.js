@@ -38,5 +38,15 @@ export function renderTodo(todoObj) {
 
   div.append(checkBox, taskInfo, taskDate, edit, dele);
 
+  checkBox.addEventListener("click", () => {
+    if (checkBox.checked) {
+      taskTitle.classList.add("completed");
+      taskDetail.classList.add("completed");
+    } else {
+      taskTitle.classList.remove("completed");
+      taskDetail.classList.remove("completed");
+    }
+  });
+
   return div;
 }
