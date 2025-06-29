@@ -4,10 +4,11 @@ export function createTodo(
   description = "",
   dueDate = "",
   priority = "low",
-  completed = false
+  completed = false,
+  id = idCounter++
 ) {
   return {
-    id: idCounter++,
+    id,
     title,
     description,
     dueDate,
@@ -17,4 +18,8 @@ export function createTodo(
       this.completed = !this.completed;
     },
   };
+}
+
+export function resetIdCounter(todos) {
+  idCounter = Math.max(...todos.map((t) => t.id), 0) + 1;
 }

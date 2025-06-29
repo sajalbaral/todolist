@@ -8,19 +8,24 @@ const mainDiv = document.querySelector(".main-container");
 const content = document.getElementById("content");
 const body = document.getElementById("body");
 
-const todo = [
-  createTodo("hello1", "do sum1", "12-07-1998", "high"),
-  createTodo("hello2", "do sum2", "12-07-1999", "med"),
-  createTodo("hello3", "do sum3", "12-07-2000", "low"),
-];
+const todo = [];
 
-content.insertBefore(renderSidebar(todo), mainDiv);
-const addButton = document.querySelector(".new-todo");
+const stored = localStorage.getItem("todos");
+if (stored) {
+  const parsed = JSON.parse(stored);
+  const restored = parsed.map((t) =>
+    createTodo(t.title, t.description, t.dueDate, t.priority, t.completed, t.id)
+  );
+  todo.push(...restored);
+  resetIdCounter(todo);
+}
 
 body.appendChild(createForm());
+content.insertBefore(renderSidebar(todo), mainDiv);
 
 const modal = document.querySelector(".modal");
 const cancel = document.querySelector(".cancel");
+const addButton = document.querySelector(".new-todo");
 
 mainDiv.innerHTML = "";
 
@@ -45,6 +50,7 @@ formHandling((todoData) => {
   );
 
   todo.push(newTodo);
+  localStorage.setItem("todos", JSON.stringify(todo));
   const todoElement = renderTodo(newTodo, todo, modal, formHandling);
   mainDiv.appendChild(todoElement);
 });
