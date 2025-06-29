@@ -76,20 +76,34 @@ export function createForm() {
   return modal;
 }
 
+let currentSubmitListener = null;
+
 export function formHandling(callback) {
   const grabForm = document.getElementById("todo-form");
-  grabForm.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const title = grabForm.title.value;
-    if (title === "") return alert("fill out the title");
 
-    const description = grabForm.description.value;
+  if (currentSubmitListener) {
+    grabForm.removeEventListener("submit", currentSubmitListener);
+  }
+
+  const submitListener = (event) => {
+    event.preventDefault();
+
+    const title = grabForm.title.value.trim();
+    const description = grabForm.description.value.trim();
     const dueDate = grabForm.dueDate.value;
     const priority = grabForm.priority.value;
 
+    if (!title) {
+      alert("fill out the title");
+      return;
+    }
+
     callback({ title, description, dueDate, priority });
+
     grabForm.reset();
-    const modal = document.querySelector(".modal");
-    modal.classList.add("hidden");
-  });
+    document.querySelector(".modal").classList.add("hidden");
+  };
+
+  grabForm.addEventListener("submit", submitListener);
+  currentSubmitListener = submitListener;
 }
