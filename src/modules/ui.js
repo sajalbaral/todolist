@@ -13,9 +13,10 @@ function createFontAwesome(tag, iconClass, iconName) {
   return icon;
 }
 
-export function renderTodo(todoObj) {
+export function renderTodo(todoObj, todoArr = []) {
   const div = document.createElement("div");
   div.classList.add("todo");
+  div.setAttribute("data-id", todoObj.id);
 
   const checkBox = document.createElement("input");
   checkBox.type = "checkbox";
@@ -29,10 +30,12 @@ export function renderTodo(todoObj) {
 
   const taskDate = createDiv("div", "date", todoObj.dueDate);
   const edit = document.createElement("div");
+  edit.classList.add("edit");
   const editIcon = createFontAwesome("i", "fas", "fa-pen");
   edit.appendChild(editIcon);
 
   const dele = document.createElement("div");
+  dele.classList.add("delete");
   const deleIcon = createFontAwesome("i", "fas", "fa-trash-alt");
   dele.appendChild(deleIcon);
 
@@ -45,6 +48,15 @@ export function renderTodo(todoObj) {
     } else {
       taskTitle.classList.remove("completed");
       taskDetail.classList.remove("completed");
+    }
+  });
+
+  dele.addEventListener("click", () => {
+    const todoId = todoObj.id;
+    const index = todoArr.findIndex((t) => t.id === todoId);
+    if (index !== -1) {
+      todoArr.splice(index, 1);
+      div.remove();
     }
   });
 

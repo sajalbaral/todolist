@@ -1,3 +1,4 @@
+let idCounter = 0;
 export function createTodo(
   title,
   description = "",
@@ -6,6 +7,7 @@ export function createTodo(
   completed = false
 ) {
   return {
+    id: idCounter++,
     title,
     description,
     dueDate,

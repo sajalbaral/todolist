@@ -25,7 +25,7 @@ const cancel = document.querySelector(".cancel");
 mainDiv.innerHTML = "";
 
 todo.forEach((ele) => {
-  mainDiv.append(renderTodo(ele));
+  mainDiv.append(renderTodo(ele, todo));
 });
 
 addButton.addEventListener("click", () => {
@@ -46,6 +46,6 @@ formHandling((todoData) => {
 
   todo.push(newTodo);
 
-  const todoElement = renderTodo(newTodo);
+  const todoElement = renderTodo(newTodo, todo);
   mainDiv.appendChild(todoElement);
 });

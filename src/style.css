@@ -175,6 +175,7 @@ Main todo list
 .edit i:hover,
 .delete i:hover {
   color: var(--accent);
+  cursor: pointer;
 }
 
 .task-info {
