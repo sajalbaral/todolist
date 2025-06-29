@@ -8,20 +8,16 @@ const mainDiv = document.querySelector(".main-container");
 const content = document.getElementById("content");
 const body = document.getElementById("body");
 
-const todo = [];
-
+let todos = [];
 const stored = localStorage.getItem("todos");
 if (stored) {
-  const parsed = JSON.parse(stored);
-  const restored = parsed.map((t) =>
+  todos = JSON.parse(stored).map((t) =>
     createTodo(t.title, t.description, t.dueDate, t.priority, t.completed, t.id)
   );
-  todo.push(...restored);
-  resetIdCounter(todo);
 }
 
 body.appendChild(createForm());
-content.insertBefore(renderSidebar(todo), mainDiv);
+content.insertBefore(renderSidebar(todos), mainDiv);
 
 const modal = document.querySelector(".modal");
 const cancel = document.querySelector(".cancel");
@@ -29,8 +25,8 @@ const addButton = document.querySelector(".new-todo");
 
 mainDiv.innerHTML = "";
 
-todo.forEach((ele) => {
-  mainDiv.append(renderTodo(ele, todo, modal, formHandling));
+todos.forEach((ele) => {
+  mainDiv.append(renderTodo(ele, todos, modal, formHandling));
 });
 
 addButton.addEventListener("click", () => {
@@ -49,8 +45,8 @@ formHandling((todoData) => {
     todoData.priority
   );
 
-  todo.push(newTodo);
-  localStorage.setItem("todos", JSON.stringify(todo));
-  const todoElement = renderTodo(newTodo, todo, modal, formHandling);
+  todos.push(newTodo);
+  localStorage.setItem("todos", JSON.stringify(todos));
+  const todoElement = renderTodo(newTodo, todos, modal, formHandling);
   mainDiv.appendChild(todoElement);
 });

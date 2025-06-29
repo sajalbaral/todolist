@@ -52,11 +52,11 @@ export function renderTodo(todoObj, todoArr = [], modal, formHandling) {
   });
 
   dele.addEventListener("click", () => {
-    const todoId = todoObj.id;
-    const index = todoArr.findIndex((t) => t.id === todoId);
-    if (index !== -1) {
-      todoArr.splice(index, 1);
+    const idx = todoArr.findIndex((t) => t.id === todoObj.id);
+    if (idx !== -1) {
+      todoArr.splice(idx, 1);
       div.remove();
+      localStorage.setItem("todos", JSON.stringify(todoArr));
     }
   });
 
