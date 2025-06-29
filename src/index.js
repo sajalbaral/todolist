@@ -5,6 +5,11 @@ import { createForm, formHandling } from "./modules/form";
 import { filterAndRender } from "./modules/filterAndRender";
 import "./style.css";
 
+function rerenderTodos() {
+  filterAndRender(todos, currentTab, renderTodo, modal, formHandling);
+  updateTabCounts(todos);
+}
+
 const mainDiv = document.querySelector(".main-container");
 const content = document.getElementById("content");
 const body = document.getElementById("body");
@@ -22,8 +27,7 @@ body.appendChild(createForm());
 content.insertBefore(
   renderSidebar(todos, (selected) => {
     currentTab = selected;
-    filterAndRender(todos, currentTab, renderTodo);
-    updateTabCounts(todos);
+    rerenderTodos();
   }),
   mainDiv
 );
@@ -32,34 +36,28 @@ const modal = document.querySelector(".modal");
 const cancel = document.querySelector(".cancel");
 const addButton = document.querySelector(".new-todo");
 
-mainDiv.innerHTML = "";
+function setupEventListeners() {
+  addButton.addEventListener("click", () => {
+    modal.classList.remove("hidden");
+  });
 
-todos.forEach((ele) => {
-  mainDiv.append(renderTodo(ele, todos, modal, formHandling));
-});
+  cancel.addEventListener("click", () => {
+    modal.classList.add("hidden");
+  });
 
-addButton.addEventListener("click", () => {
-  modal.classList.remove("hidden");
-});
+  formHandling((todoData) => {
+    const newTodo = createTodo(
+      todoData.title,
+      todoData.description,
+      todoData.dueDate,
+      todoData.priority
+    );
 
-cancel.addEventListener("click", () => {
-  modal.classList.add("hidden");
-});
+    todos.push(newTodo);
+    localStorage.setItem("todos", JSON.stringify(todos));
+    rerenderTodos();
+  });
+}
 
-formHandling((todoData) => {
-  const newTodo = createTodo(
-    todoData.title,
-    todoData.description,
-    todoData.dueDate,
-    todoData.priority
-  );
-
-  todos.push(newTodo);
-  localStorage.setItem("todos", JSON.stringify(todos));
-  const todoElement = renderTodo(newTodo, todos, modal, formHandling);
-  mainDiv.appendChild(todoElement);
-  updateTabCounts(todos);
-});
-
-updateTabCounts(todos);
-filterAndRender(todos, currentTab, renderTodo, modal, formHandling);
+setupEventListeners();
+rerenderTodos();

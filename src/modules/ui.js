@@ -13,7 +13,14 @@ function createFontAwesome(tag, iconClass, iconName) {
   return icon;
 }
 
-export function renderTodo(todoObj, todoArr = [], modal, formHandling) {
+export function renderTodo(
+  todoObj,
+  todoArr = [],
+  modal,
+  formHandling,
+  currentTab,
+  rerenderTodos
+) {
   const div = document.createElement("div");
   div.classList.add("todo");
   div.setAttribute("data-id", todoObj.id);
@@ -55,9 +62,8 @@ export function renderTodo(todoObj, todoArr = [], modal, formHandling) {
     const idx = todoArr.findIndex((t) => t.id === todoObj.id);
     if (idx !== -1) {
       todoArr.splice(idx, 1);
-      div.remove();
       localStorage.setItem("todos", JSON.stringify(todoArr));
-      updateTabCounts(todos);
+      rerenderTodos;
     }
   });
 
@@ -81,6 +87,8 @@ export function renderTodo(todoObj, todoArr = [], modal, formHandling) {
       div.querySelector(".details").textContent = updatedData.description;
       div.querySelector(".date").textContent = updatedData.dueDate;
     });
+    localStorage.setItem("todos", JSON.stringify(todoArr));
+    rerenderTodos;
   });
 
   return div;
