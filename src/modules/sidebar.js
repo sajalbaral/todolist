@@ -1,3 +1,5 @@
+import { isToday, isThisWeek } from "date-fns";
+
 function createList(title, name) {
   const list = document.createElement("li");
   list.setAttribute("data-tab", title);
@@ -12,7 +14,7 @@ function createList(title, name) {
   return list;
 }
 
-export function renderSidebar(todos) {
+export function renderSidebar(todos, onTabChange) {
   const nav = document.createElement("nav");
   nav.classList.add("side-bar");
 
@@ -30,26 +32,22 @@ export function renderSidebar(todos) {
 
   navUl.append(home, today, week, addButton);
 
-  const filterAndRender = (selectedTab) => {
-    const mainDiv = document.querySelector(".main-container");
-    mainDiv.innerHTML = "";
-
-    let filtered = [];
-    if (selectedTab === "home") filtered = todos;
-    if (selectedTab === "today")
-      filtered = todos.filter((t) => isToday(t.dueDate));
-    if (selectedTab === "week")
-      filtered = todos.filter((t) => isThisWeek(t.dueDate));
-
-    filtered.forEach((t) => mainDiv.append(renderTodo(t)));
-  };
-
   [home, today, week].forEach((tab) => {
     tab.addEventListener("click", () => {
       const selected = tab.getAttribute("data-tab");
-      filterAndRender(selected);
+      onTabChange(selected);
     });
   });
 
   return nav;
+}
+
+export function updateTabCounts(todos) {
+  const homeCount = todos.length;
+  const todayCount = todos.filter((t) => isToday(new Date(t.dueDate))).length;
+  const weekCount = todos.filter((t) => isThisWeek(new Date(t.dueDate))).length;
+
+  document.querySelector('[data-tab="home"] .count').textContent = homeCount;
+  document.querySelector('[data-tab="today"] .count').textContent = todayCount;
+  document.querySelector('[data-tab="week"] .count').textContent = weekCount;
 }

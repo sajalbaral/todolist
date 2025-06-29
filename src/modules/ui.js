@@ -57,6 +57,7 @@ export function renderTodo(todoObj, todoArr = [], modal, formHandling) {
       todoArr.splice(idx, 1);
       div.remove();
       localStorage.setItem("todos", JSON.stringify(todoArr));
+      updateTabCounts(todos);
     }
   });
 
