@@ -63,7 +63,7 @@ export function renderTodo(
     if (idx !== -1) {
       todoArr.splice(idx, 1);
       localStorage.setItem("todos", JSON.stringify(todoArr));
-      rerenderTodos;
+      rerenderTodos();
     }
   });
 
@@ -86,9 +86,9 @@ export function renderTodo(
       div.querySelector(".task-title").textContent = updatedData.title;
       div.querySelector(".details").textContent = updatedData.description;
       div.querySelector(".date").textContent = updatedData.dueDate;
+      localStorage.setItem("todos", JSON.stringify(todoArr));
+      rerenderTodos();
     });
-    localStorage.setItem("todos", JSON.stringify(todoArr));
-    rerenderTodos;
   });
 
   return div;

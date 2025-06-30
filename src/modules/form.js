@@ -8,6 +8,10 @@ function createLabels(title, type) {
   input.name = title;
   input.required = true;
 
+  if (title === "dueDate") {
+    input.min = new Date().toISOString().split("T")[0];
+  }
+
   label.appendChild(input);
 
   return label;

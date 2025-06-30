@@ -1,4 +1,5 @@
-import { isToday, isThisWeek } from "date-fns";
+import { isToday, isThisWeek, parseISO } from "date-fns";
+import { updateTabCounts } from "./sidebar.js";
 
 export function filterAndRender(
   todos,
@@ -13,13 +14,20 @@ export function filterAndRender(
   let filtered = [];
   if (selectedTab === "home") filtered = todos;
   if (selectedTab === "today") {
-    filtered = todos.filter((t) => isToday(new Date(t.dueDate)));
+    filtered = todos.filter((t) => t.dueDate && isToday(parseISO(t.dueDate)));
   }
   if (selectedTab === "week") {
-    filtered = todos.filter((t) => isThisWeek(new Date(t.dueDate)));
+    filtered = todos.filter(
+      (t) => t.dueDate && isThisWeek(new Date(t.dueDate))
+    );
   }
 
   filtered.forEach((t) =>
-    mainDiv.append(renderTodoFn(t, todos, modal, formHandling))
+    mainDiv.append(
+      renderTodoFn(t, todos, modal, formHandling, selectedTab, () =>
+        filterAndRender(todos, selectedTab, renderTodoFn, modal, formHandling)
+      )
+    )
   );
+  updateTabCounts(todos);
 }

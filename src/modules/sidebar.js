@@ -35,6 +35,10 @@ export function renderSidebar(todos, onTabChange) {
   [home, today, week].forEach((tab) => {
     tab.addEventListener("click", () => {
       const selected = tab.getAttribute("data-tab");
+      document
+        .querySelectorAll(".nav li")
+        .forEach((li) => li.classList.remove("selected"));
+      tab.classList.add("selected");
       onTabChange(selected);
     });
   });

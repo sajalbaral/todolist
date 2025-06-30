@@ -303,3 +303,8 @@ new todo form
 .form-buttons .cancel:hover {
   background-color: #bbb;
 }
+
+.nav li.selected {
+  background-color: #eee;
+  font-weight: bold;
+}
