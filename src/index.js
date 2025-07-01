@@ -1,13 +1,25 @@
 import { createTodo, resetIdCounter } from "./modules/todo";
 import { renderTodo } from "./modules/ui";
 import { renderSidebar, updateTabCounts } from "./modules/sidebar";
-import { createForm, formHandling } from "./modules/form";
+import { createForm, formHandling, setProjectOptions } from "./modules/form";
 import { filterAndRender } from "./modules/filterAndRender";
 import "./style.css";
 
 function rerenderTodos() {
   filterAndRender(todos, currentTab, renderTodo, modal, formHandling);
   updateTabCounts(todos);
+}
+
+function rerenderSidebar() {
+  const oldSidebar = document.querySelector(".side-bar");
+  oldSidebar.remove();
+  content.insertBefore(
+    renderSidebar(todos, projects, (selected) => {
+      currentTab = selected;
+      rerenderTodos();
+    }),
+    mainDiv
+  );
 }
 
 const mainDiv = document.querySelector(".main-container");
@@ -23,9 +35,12 @@ if (stored) {
   );
 }
 
+let projects = JSON.parse(localStorage.getItem("projects")) || ["default"];
+setProjectOptions(projects);
+
 body.appendChild(createForm());
 content.insertBefore(
-  renderSidebar(todos, (selected) => {
+  renderSidebar(todos, projects, (selected) => {
     currentTab = selected;
     rerenderTodos();
   }),
@@ -50,8 +65,18 @@ function setupEventListeners() {
       todoData.title,
       todoData.description,
       todoData.dueDate,
-      todoData.priority
+      todoData.priority,
+      false,
+      undefined,
+      todoData.project
     );
+
+    if (!projects.includes(todoData.project)) {
+      projects.push(todoData.project);
+      localStorage.setItem("projects", JSON.stringify(projects));
+      setProjectOptions(projects);
+      rerenderSidebar();
+    }
 
     todos.push(newTodo);
     localStorage.setItem("todos", JSON.stringify(todos));

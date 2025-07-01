@@ -14,7 +14,7 @@ function createList(title, name) {
   return list;
 }
 
-export function renderSidebar(todos, onTabChange) {
+export function renderSidebar(todos, projects, onTabChange) {
   const nav = document.createElement("nav");
   nav.classList.add("side-bar");
 
@@ -40,6 +40,19 @@ export function renderSidebar(todos, onTabChange) {
         .forEach((li) => li.classList.remove("selected"));
       tab.classList.add("selected");
       onTabChange(selected);
+    });
+  });
+
+  const projectHeader = document.createElement("li");
+  projectHeader.textContent = "Projects";
+  navUl.appendChild(projectHeader);
+
+  projects.forEach((proj) => {
+    const projTab = createList(proj, proj);
+    navUl.appendChild(projTab);
+
+    projTab.addEventListener("click", () => {
+      onTabChange(proj);
     });
   });
 

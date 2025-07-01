@@ -13,13 +13,14 @@ export function filterAndRender(
 
   let filtered = [];
   if (selectedTab === "home") filtered = todos;
-  if (selectedTab === "today") {
+  else if (selectedTab === "today") {
     filtered = todos.filter((t) => t.dueDate && isToday(parseISO(t.dueDate)));
-  }
-  if (selectedTab === "week") {
+  } else if (selectedTab === "week") {
     filtered = todos.filter(
       (t) => t.dueDate && isThisWeek(new Date(t.dueDate))
     );
+  } else {
+    filtered = todos.filter((t) => t.project === selectedTab);
   }
 
   filtered.forEach((t) =>

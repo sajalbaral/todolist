@@ -65,9 +65,28 @@ function formTemplate() {
   cancel.classList.add("cancel");
   cancel.textContent = "Cancel";
 
+  const projectLabel = document.createElement("label");
+  projectLabel.textContent = "Project";
+
+  const projectSelect = document.createElement("select");
+  projectSelect.name = "project";
+  projectSelect.classList.add("project-select");
+
+  const defaultOption = createOptions("default", "Default");
+  projectSelect.appendChild(defaultOption);
+  projectLabel.appendChild(projectSelect);
+
   formButtons.append(submit, cancel);
 
-  formDiv.append(newTodo, title, description, dueDate, prio, formButtons);
+  formDiv.append(
+    newTodo,
+    title,
+    description,
+    dueDate,
+    prio,
+    formButtons,
+    projectLabel
+  );
 
   return formDiv;
 }
@@ -96,13 +115,14 @@ export function formHandling(callback) {
     const description = grabForm.description.value.trim();
     const dueDate = grabForm.dueDate.value;
     const priority = grabForm.priority.value;
+    const project = grabForm.project.value;
 
     if (!title) {
       alert("fill out the title");
       return;
     }
 
-    callback({ title, description, dueDate, priority });
+    callback({ title, description, dueDate, priority, project });
 
     grabForm.reset();
     document.querySelector(".modal").classList.add("hidden");
@@ -110,4 +130,15 @@ export function formHandling(callback) {
 
   grabForm.addEventListener("submit", submitListener);
   currentSubmitListener = submitListener;
+}
+
+export function setProjectOptions(projects) {
+  const select = document.querySelector(".project-select");
+  if (!select) return;
+
+  select.innerHTML = "";
+  projects.forEach((proj) => {
+    const option = createOptions(proj, proj);
+    select.appendChild(option);
+  });
 }

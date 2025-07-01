@@ -5,7 +5,8 @@ export function createTodo(
   dueDate = "",
   priority = "low",
   completed = false,
-  id = idCounter++
+  id = idCounter++,
+  project = "default"
 ) {
   return {
     id,
@@ -17,6 +18,7 @@ export function createTodo(
     toggleComplete() {
       this.completed = !this.completed;
     },
+    project,
   };
 }
 
