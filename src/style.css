@@ -308,3 +308,39 @@ new todo form
   background-color: #eee;
   font-weight: bold;
 }
+
+.nav li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav li .title {
+  flex-grow: 1;
+}
+
+.nav li .delete-project {
+  margin-left: 6px;
+  color: red;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.delete-project {
+  color: red;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.delete-project:hover {
+  color: darkred;
+}
+
+.nav li .delete-project {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.nav li:hover .delete-project {
+  opacity: 1;
+}

@@ -84,8 +84,8 @@ function formTemplate() {
     description,
     dueDate,
     prio,
-    formButtons,
-    projectLabel
+    projectLabel,
+    formButtons
   );
 
   return formDiv;

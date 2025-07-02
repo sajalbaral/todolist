@@ -76,12 +76,14 @@ export function renderTodo(
     grabForm.description.value = todoObj.description;
     grabForm.dueDate.value = todoObj.dueDate;
     grabForm.priority.value = todoObj.priority;
+    grabForm.project.value = todoObj.project;
 
     formHandling((updatedData) => {
       todoObj.title = updatedData.title;
       todoObj.description = updatedData.description;
       todoObj.dueDate = updatedData.dueDate;
       todoObj.priority = updatedData.priority;
+      todoObj.project = updatedData.project;
 
       div.querySelector(".task-title").textContent = updatedData.title;
       div.querySelector(".details").textContent = updatedData.description;
