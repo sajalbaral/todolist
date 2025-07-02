@@ -22,3 +22,17 @@ A dynamic and modular Todo List web app built using vanilla JavaScript. Users ca
 - HTML5
 - CSS
 - date-fns (for date filtering)
+
+## What I learned
+
+- Managing application state across modules
+
+- Dynamic DOM manipulation using event delegation
+
+- Modular architecture with separation of concerns
+
+- Real-time filtering of tasks based on criteria
+
+- Handling edge cases like enforcing valid due dates
+
+- Persisting UI state with localStorage
