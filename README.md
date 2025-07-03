@@ -12,9 +12,7 @@ A dynamic and modular Todo List web app built using vanilla JavaScript. Users ca
 - Persistent data using localStorage
 - Clean UI with modular structure (ES6 Modules)
 
-## Live Demo
-
-[View Live]
+## Live Demo: https://sajalbaral.github.io/todolist/
 
 ## Built With
 
